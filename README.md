@@ -238,3 +238,8 @@ Berikut ini adalah dokumentasi praktikum 3 workshop web framework.
       }
       ?>
       ```
+   3. Function / Method **_index_**, adalah function yang pertama kali diakses ketika pengguna membuka Code Igniter. Dalam method **_index_** terdapat variabel berupa array berisi data yang diambil dari **_Model m_data.php_** menggunakan method **_tampil_data()_**. Kemudian method **_index_** akan menampilkan **_View v_user.php_** dan mengirimkan array berisi data dari **_Model m_data.php_**.
+   
+   4. Function / Method **_login_**, adalah function yang berfungsi untuk menampilkan **_View v_login.php_**.
+   
+   5. Function / Method **_aksi_login_**, adalah function yang berfungsi untuk 
