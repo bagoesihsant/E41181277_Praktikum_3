@@ -385,4 +385,146 @@ Berikut ini adalah dokumentasi praktikum 3 workshop web framework.
       
       ![ImageDokumentasi8](https://github.com/bagoesihsant/E41181277_Praktikum_3/blob/master/img_dokumentasi/Screenshot_Dokumentasi_013.png)
    
+## 7. _v_login.php_
+   File ini berfungsi sebagai **_View_**.
    
+   1. Setelah selesai mengedit **_v_user.php_**, buka folder **application/views** dan buat file baru bernama **_v_login.php**.
+      
+      ![ImageDokumentasi8](https://github.com/bagoesihsant/E41181277_Praktikum_3/blob/master/img_dokumentasi/Screenshot_Dokumentasi_007.png)
+      
+   2. Kemudian ketikkan kode berikut ini kedalam **_v_user.php_**.
+      ```php
+         <!DOCTYPE HTML>
+         <html>
+            <head>
+               <title>Membuat Login dengan CodeIgniter | MalasNgoding.com</title>
+            </head>
+            <body>
+               <h1>Membuat Login dengan CodeIgniter | MalasNgoding.com</h1>
+               <form action="<?php echo base_url('crud/aksi_login'); ?>" method="post">
+                  <table>
+                     <tr>
+                        <td> Username </td>
+                        <td> <input type="text" name="username"> </td>
+                     </tr>
+                     <tr>
+                        <td> Password </td>
+                        <td> <input type="password" name="password"> </td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td> <input type="submit" value="Login"> </td>
+                     </tr>
+                  </table>
+               </form>
+            </body>
+         </html>
+      ```
+   3. Setelah mengetikkan kode tersebut, akan menghasilkan tampilan seperti ini :
+      
+      ![ImageDokumentasi9](https://github.com/bagoesihsant/E41181277_Praktikum_3/blob/master/img_dokumentasi/Screenshot_Dokumentasi_012.png)
+      
+## 8. _v_input.php_
+   File ini berfungsi sebagai **_View_**.
+   
+   1. Setelah selesai mengedit **_v_login.php_**, buka folder **application/views** kemudian buat file baru bernama **_v_input.php_**.
+      
+      ![ImageDokumentasi10](https://github.com/bagoesihsant/E41181277_Praktikum_3/blob/master/img_dokumentasi/Screenshot_Dokumentasi_008.png)
+      
+   2. Kemudian ketikkan kode berikut kedalam **_v_input.php_**.
+      ```php
+         <!DOCTYPE HTML>
+         <html>
+            <head>
+               <title>Membuat CRUD dengan CodeIgniter | MalasNgoding.com</title>
+            </head>
+            <body>
+               <center>
+                  <h1>Membuat CRUD dengan CodeIgniter | MalasNgoding.com</h1>
+                  <h3>Menambah data baru</h3>
+               </center>
+               
+               <form action="<?php echo base_url('crud/tambah_aksi'); ?>" method="post">
+                  <table style="margin: 20px auto;">
+                     <tr>
+                        <td>Nama</td>
+                        <td><input type="text" name="nama"></td>
+                     </tr>
+                     <tr>
+                        <td>Alamat</td>
+                        <td><input type="text" name="alamat"></td>
+                     </tr>
+                     <tr>
+                        <td>Pekerjaan</td>
+                        <td><input type="text" name="pekerjaan"></td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td><input type="submit" value="Tambah"></td>
+                     </tr>
+                  </table>
+               </form>
+               
+            </body>
+         </html>
+      ```
+   3. Setelah mengetikkan kode tersebut, maka tampilan akan seperti ini :
+      
+      ![ImageDokumentasi11](https://github.com/bagoesihsant/E41181277_Praktikum_3/blob/master/img_dokumentasi/Screenshot_Dokumentasi_011.png)
+      
+## 9. _v_update.php_
+   File ini berfungsi sebagai **_View_**.
+   
+   1. Setelah selesai mengedit **_v_input.php_**, buka folder **application/views** kemudian buat file baru bernama **_v_update.php_**.
+      
+      ![ImageDokumentasi12](https://github.com/bagoesihsant/E41181277_Praktikum_3/blob/master/img_dokumentasi/Screenshot_Dokumentasi_009.png)
+      
+   2. Kemudian ketikkan kode berikut ini kedalam **_v_update.php_**.
+      ```php
+         <!DOCTYPE HTML>
+         <html>
+            <head>
+               <title>Membuat CRUD dengan CodeIgniter | MalasNgoding.com</title>
+            </head>
+            <body>
+               <center>
+                  <h1>Membuat CRUD dengan CodeIgniter | MalasNgoding.com</h1>
+                  <h3>Edit Data</h3>
+               </center>
+               <?php
+                  foreach($user as $u)
+                  {
+                     ?>
+                        <form method="<?php echo base_url('crud/update'); ?>" method="post">
+                           <table style="margin: 20px auto;">
+                              <tr>
+                                 <td>Nama</td>
+                                 <td>
+                                    <input type="hidden" name="id" value="<?php echo $u->id?; >">
+                                    <input type="text" name="nama" value="<?php echo $u->nama; ?>">
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>Alamat</td>
+                                 <td><input type="text" name="alamat" value="<?php echo $u->alamat; ?>"></td>
+                              </tr>
+                              <tr>
+                                 <td>Pekerjaan</td>
+                                 <td><input type="text" name="pekerjaan" value="<?php echo $u->pekerjaan; ?>"></td>
+                              </tr>
+                              <tr>
+                                 <td></td>
+                                 <td><input type="submit" value="Simpan"></td>
+                              </tr>
+                           </table>
+                        </form>
+                     <?php
+                  }
+               ?>
+            </body>
+         </html>
+      ```
+   3. Setelah memasukkan kode tersebut, maka akan tampil seperti ini :
+      
+      ![ImageDokumentasi13](https://github.com/bagoesihsant/E41181277_Praktikum_3/blob/master/img_dokumentasi/Screenshot_Dokumentasi_014.png)
+      
