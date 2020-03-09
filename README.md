@@ -1,2 +1,2 @@
-# E41181277_Praktikum_3
-Repository untuk praktikum 3 workshop web framework
+# Dokumentasi Praktikum 3 Workshop Web Framework
+  Berikut ini adalah dokumentasi praktikum 3 workshop web framework.
