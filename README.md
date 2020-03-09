@@ -242,4 +242,147 @@ Berikut ini adalah dokumentasi praktikum 3 workshop web framework.
    
    4. Function / Method **_login_**, adalah function yang berfungsi untuk menampilkan **_View v_login.php_**.
    
-   5. Function / Method **_aksi_login_**, adalah function yang berfungsi untuk 
+   5. Function / Method **_aksi_login_**, adalah function yang berfungsi untuk memeriksa apakah username dan password yang dimasukkan oleh user melalui **_v_login.php_** terdapat dalam database melalui method **_cek_login_** pada **_m_data.php_**. Apabila username dan password ditemukan maka function **_aksi_login_** akan mengatur session bahwa saat ini kita sedang login, apabila username dan password tidak ditemukan maka dikembalikan menuju halaman utama.
+   
+   6. Function / Method **_logout_**, adalah function yang berfungsi untuk menghapus session kita dari browser sehingga kita keluar dari jalannya sistem.
+   
+   7. Function / Method **_tambah_**, adalah function yang berfungsi untuk menampilkan **_View v_input.php_**.
+   
+   8. Function / Method **_tambah_aksi_**, adalah function yang berfungsi untuk menambahkan data berdasarkan input user kedalam database menggunakan method **_input_data_** dari **_m_data.php_**.
+   
+   9. Function / Method **_hapus_**, adalah function yang berfungsi untuk menghapus data berdasarkan input user ke database menggunakan method **_hapus_data_** dari **_m_data.php_**.
+   
+   10. Function / Method **_edit_**, adalah function yang berfungsi untuk menampilkan **_View V_update_** berisi data yang diambil dari database menggunakan method **_edit_data_** dari **_m_data.php_** berdasarkan input user.
+   
+   11. Function / Method **_update_**, adalah function yang berfungsi untuk mengubah data dalam database berdasarkan input user menggunakan method **_update_data_** dari **_m_data.php_**.
+   
+## 5. _m_data.php_
+   File ini berfungsi sebagai **_Model_**. **_Model_** adalah file Code Igniter yang berfungsi untuk berinteraksi dengan database seperti menyimpan, menghapus, mengubah, mengambil, dan lainnya.
+   
+   1. Setelah selesai mengedit **_crud.php_**, buka folder **application/models** kemudian buat file baru bernama **_m_data.php_**.
+      
+      ![ImageDokumentasi5](https://github.com/bagoesihsant/E41181277_Praktikum_3/blob/master/img_dokumentasi/Screenshot_Dokumentasi_005.png)
+      
+   2. Kemudian ketikkan kode berikut ini kedalam **_m_data.php_**.
+      ```php
+      <?php
+         class M_data extends CI_Model{
+            
+            public function tampil_data()
+            {
+               return $this->db->get('user');
+            }
+            
+            public function input_data($data, $table)
+            {
+               $this->db->insert($table,$data);
+            }
+            
+            public function hapus_data($where,$table)
+            {
+               $this->db->where($where);
+               $this->db->delete($table);
+            }
+            
+            public function edit_data($where,$table)
+            {
+               $this->db->get_where($table,$where);
+            }
+            
+            public function update_data($where,$data,$table)
+            {
+               $this->db->where($where);
+               $this->db->update($table,$data);
+            }
+            
+            public function cek_login($table, $where)
+            {
+               return $this->db->get_where($table,$where);
+            }
+            
+         }
+      ?>
+      ```
+   3. Fungsi / Method **_tampil_data_**, berfungsi untuk mengambil **_seluruh_** data dari database.
+  
+   4. Fungsi / Method **_input_data_**, berfungsi untuk memasukkan data dari user kedalam database.
+  
+   5. Fungsi / Method **_hapus_data_**, berfungsi untuk menghapus data dalam database berdasarkan input user.
+  
+   6. Fungsi / Method **_edit_data_**, berfungsi untuk mengambil **_sebagian_** data dari database berdasarkan input user.
+  
+   7. Fungsi / Method **_update_data_**, berfungsi untuk mengubah data dalam database berdasarkan input user.
+  
+   8. Fungsi / Method **_cek_login_**, berfungsi untuk mencari apakah username dan password user berada didalam database atau tidak.
+  
+## 6. _v_user.php_
+   File ini berfungsi sebagai **_View_**. **_View_**, adalah file Code Igniter yang berfungsi sebagai laman yang ditampilkan ke user.
+   
+   1. Setelah selesai mengedit **_m_data.php_**, buka folder **application/views** kemudian buat file baru bernama **_v_user.php_**.
+      
+      ![ImageDokumentasi6](https://github.com/bagoesihsant/E41181277_Praktikum_3/blob/master/img_dokumentasi/Screenshot_Dokumentasi_006.png)
+      
+   2. Kemudian ketikkan kode beriut kedalam **_v_user.php_**.
+      ```php
+         <!DOCTYPE HTML>
+         <html>
+            <head>
+               <title>Membuat CRUD dengan CodeIgniter | MalasNgoding.com</title>
+            </head>
+            <body>
+               <center><h1>Membuat CRUD dengan CodeIgniter | MalasNgoding.com</h1></center>
+               <center><?php echo anchor('crud/tambah','Tambah Data');?></center>
+               
+               <?php
+                  if($this->session->userdata('status') != 'login')
+                  {
+                     ?>
+                     <center><h1> Anda belum login </h1></center>
+                     <center><?php echo anchor('crud/login','Login');?></center>
+                     <?php
+                  }else
+                  {
+                     ?>
+                     <center><h1>Selamat datang, <?php echo $this->session->userdata('nama');?></h1></center>
+                     <center><?php echo anchor('crud/logout','Logout');?></center>
+                     <?php
+                  }
+               ?>
+               
+               <table style="margin:20px auto;" border="1">
+                  <tr>
+                     <th>No</th>
+                     <th>Nama</th>
+                     <th>Alamat</th>
+                     <th>Pekerjaan</th>
+                     <th>Action</th>
+                  </tr>
+                  <?php
+                     $no = 1;
+                     foreach($user as $u)
+                     {
+                        ?>
+                           <td><?php echo $no++; ?></td>
+                           <td><?php echo $u->nama; ?></td>
+                           <td><?php echo $u->alamat; ?></td>
+                           <td><?php echo $u->pekerjaan; ?></td>
+                           <td>
+                              <?php echo anchor('crud/edit'.$u->id,'Edit');?>
+                              <?php echo anchor('crud/edit'.$u->id,'Hapus')?>
+                           </td>
+                        <?php
+                     }
+                  ?>
+               </table>
+            </body>
+         </html>
+      ```
+   3. Setelah selesai mengetikkan kode, maka akan muncul tampilan seperti ini :
+      
+      ![ImageDokumentasi7](https://github.com/bagoesihsant/E41181277_Praktikum_3/blob/master/img_dokumentasi/Screenshot_Dokumentasi_010.png)
+   
+   4. Fungsi dari **_$this->session->userdata('status') != 'login'_** adalah memeriksa apakah kita sudah terlogin atau belum, apabila belum terlogin maka akan muncul tampilan seperti pada nomor 3. Apabila sudah terlogin maka akan muncul tampilan :
+      
+      ![ImageDokumentasi8](https://github.com/bagoesihsant/E41181277_Praktikum_3/blob/master/img_dokumentasi/Screenshot_Dokumentasi_013.png)
+   
+   
